@@ -4,9 +4,9 @@ theme: default
 size: 16:9
 paginate: true
 html: true
-title: Single Ownership Principle – understanding SRP through Student
+title: Single Responsibility Principle – misunterstood and underestimated
 author: Nodirbek Usmanov
-description: A Student example and three further classes explain SRP and SOP as two ways to identify the same change boundary.
+description: From reasons for change to requirements owners.
 footer: Nodirbek Usmanov | Befico GmbH
 style: |
   section { background: #fff; color: #171717; font-family: Arial, Helvetica, sans-serif; font-size: 30px; padding: 65px 70px 70px; justify-content: flex-start; }
@@ -47,6 +47,10 @@ style: |
   .compare h2 { font-size: 28px; color: #6f5700; min-height: 70px; }
   .compare blockquote { border: 0; padding: 0; margin: 15px 0 25px; font-size: 34px; line-height: 1.32; }
   .compare p { font-size: 22px; }
+  section.comparison table { width: 100%; table-layout: fixed; border-collapse: collapse; margin-top: 28px; font-size: 25px; }
+  section.comparison th, section.comparison td { padding: 19px 17px; border: 1px solid #b8b8b8; vertical-align: top; line-height: 1.28; }
+  section.comparison th { background: #f5edcf; color: #5c4900; text-align: left; }
+  section.comparison th:first-child, section.comparison td:first-child { width: 19%; font-weight: 700; }
     .comparison-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 25px; }
     .comparison-column { min-width: 0; padding: 17px 20px; background: #f3f3ef; border-top: 4px solid #777; }
     .comparison-column.owner { background: #f5edcf; border-color: #a47b00; }
@@ -79,7 +83,7 @@ style: |
 
 ![bg left:45% cover](assets/image1.jpeg)
 # Single Ownership Principle
-## Understanding SRP through Student and three more examples
+## From reasons for change to requirements owners
 Nodirbek Usmanov
 
 [linkedin.com/in/nodirbek-usmanov](https://linkedin.com/in/nodirbek-usmanov)  
@@ -129,27 +133,58 @@ Four methods. How many independent reasons to change?
 
 ---
 
+# What counts as one reason?
+
+`save` and `findById` both use the database. That alone does not make them one responsibility.
+
+- **One reason** if the same storage policy drives changes to both.
+- **Two reasons** if different policies can change them independently.
+
+Method names and technology do not tell us which case applies.
+
+---
+
+<!-- _class: quote -->
+
+# Single Ownership Principle (SOP)
+
+> “A class should answer to one owner whose requirements drive its changes.”
+
+<p class="attribution">Nodirbek Usmanov, 2023</p>
+
+---
+
+# What is an owner here?
+
+**Owner (in SOP):** the role that defines requirements for one coherent policy.
+
+An owner is a **requirements role**, not necessarily the person or team maintaining the code.
+
+One person may fill several owner roles. One team may implement changes for several owners.
+
+---
+
 <!-- _class: diagram tight -->
 
-# Who asks for these changes?
+# Which owner drives each change?
 
 ![width:960px](diagrams/student-owners.svg)
 
 ---
 
-# Three change sources, four methods
+# Assumed change sources for Student
 
 - **Professor / Administration:** `getFaculty`
 - **DBA:** `save` and `findById`
 - **Operations / BI:** `describeStudent`
 
-`save` and `findById` count together **if the same storage policy drives changes to both**.
+The code could have one maintainer and still serve all three requirement owners.
 
 ---
 
 # One responsibility can contain several functions
 
-In this scenario, `save` and `findById` form **one family of functions** if one owner sets the storage policy for both.
+In this scenario, `save` and `findById` form **one family of functions** if the same owner and storage policy drive changes to both.
 
 `getFaculty` and `describeStudent` answer to different owners. They can change for different reasons.
 
@@ -167,16 +202,6 @@ One Student class must change for three independent groups.
 
 ---
 
-# What is an owner here?
-
-**Owner (in SOP):** the role whose requirements define one narrowly scoped business function.
-
-An owner is a **role**, not a headcount. One person may fill several owner roles; one team may serve several owners.
-
-In this example, the proposed owners are Professor / Administration, DBA, and Operations / BI.
-
----
-
 <!-- _class: diagram highlight -->
 
 # SOP: focus on the owners
@@ -187,32 +212,39 @@ Which independent group can ask this class to change?
 
 ---
 
-<!-- _class: quote -->
-
-# Single Ownership Principle (SOP)
-
-> “A class should answer to one owner whose requirements drive its changes.”
-
-<p class="attribution">Nodirbek Usmanov, 2023</p>
-
----
+<!-- _class: comparison -->
 
 # SRP and SOP find the same boundary
 
-<div class="compare">
-<div>
-<h2>SRP asks</h2>
-<blockquote>How many independent reasons can change this class?</blockquote>
-<p>Student has three in this example.</p>
-</div>
-<div>
-<h2>SOP asks</h2>
-<blockquote>Who can independently request those changes?</blockquote>
-<p>Student serves three proposed owners in this example.</p>
-</div>
-</div>
+| | SRP | SOP |
+|---|---|---|
+| Perspective | Which independent reasons can change the class? | Which independent requirements owners request changes? |
+| Strength | Describes the intended separation. | Makes the source of change concrete. |
+| Student example | Three reasons to change. | Three owners. The same separation. |
 
-<p class="subtitle" style="margin-top:32px">Both locate the boundary at independent sources of requirements and change.</p>
+---
+
+# SOP as a design review question
+
+For each behavior in `Student`, ask:
+
+1. Who defines its requirements?
+2. Can that owner request changes independently?
+3. Could such a change affect behavior serving another owner?
+
+SOP makes the change boundary easier to discuss before deciding where to split the code.
+
+---
+
+# Robert C. Martin already linked SRP to people
+
+> “This principle is about people.”
+
+Robert C. Martin's 2014 explanation traces a reason to change to the people who request it for a narrowly defined business function.
+
+**SOP names that requirements role an owner. It does not introduce a different rule for splitting classes.**
+
+<p class="attribution">Robert C. Martin, 2014</p>
 
 ---
 
@@ -226,14 +258,13 @@ Keep together what changes for the same reason; separate what changes for differ
 
 ---
 
-# A necessary check before splitting
+# An org chart is not an owner map
 
-- `save` and `findById` do **not** belong together merely because both access a database.
-- Ask whether one storage policy really drives changes to both methods.
-- Check whether DBA and Operations / BI specify behavior, or only help implement it.
-- Check dependencies after the split: a change to shared `Student` may still affect the other classes.
+- One Campus Systems team could maintain all four methods while three policies drive their changes.
+- A DBA might implement storage changes without defining the storage requirements.
+- Even after the split, a shared `Student` model can couple the three classes.
 
-The owner map is a **hypothesis to verify**, not proof from the method names.
+**Verify policy decisions and change scenarios.** Method names and team names are only clues.
 
 ---
 
@@ -322,8 +353,9 @@ Presenter prompt: Suppose Employee gains SummarizeHoursWorked. Ask the audience 
 
 - The number of methods does not determine the number of responsibilities.
 - **SRP:** Does the class have one reason to change?
-- **SOP:** Does it serve one owner of that responsibility?
-- Count narrowly defined requirement sources, not broad platform teams. Then both identify the same boundary.
+- **SOP:** Which requirements owner can independently ask it to change?
+- Count coherent policies and their owners, not methods or broad platform teams.
+- SOP makes SRP's change source explicit. Martin's 2014 explanation already points to people.
 
 ---
 
