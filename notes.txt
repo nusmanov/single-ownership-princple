@@ -5,3 +5,8 @@ SOP fragt, wer für Entscheidungen verantwortlich ist
 
 Roter Faden machen.
 
+# Owner-Folie – deutsche Fassung
+
+Ein Owner ist die Rolle, die einen zusammenhängenden Satz von Anforderungen festlegt.
+Der Owner entscheidet, was die Software leisten muss; das Team, das den Code pflegt, kann ein anderes sein.
+Eine Person kann mehrere Owner-Rollen übernehmen, und ein Team kann für mehrere Owner arbeiten.

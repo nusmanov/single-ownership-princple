@@ -144,6 +144,25 @@ Method names and technology do not tell us which case applies.
 
 ---
 
+<!-- _class: diagram highlight -->
+
+# SRP: focus on the class
+
+![width:970px](diagrams/student-class-focus.svg)
+
+One Student class must change for three independent groups.
+
+---
+
+<!-- _class: diagram highlight -->
+
+# SOP: focus on the owners
+
+![width:970px](diagrams/student-owner-focus.svg)
+
+Which independent group can ask this class to change?
+
+---
 <!-- _class: quote -->
 
 # Single Ownership Principle (SOP)
@@ -156,11 +175,11 @@ Method names and technology do not tell us which case applies.
 
 # What is an owner here?
 
-**Owner (in SOP):** the role that defines requirements for one coherent policy.
+An **owner** is the role that defines a coherent set of requirements.
 
-An owner is a **requirements role**, not necessarily the person or team maintaining the code.
+The owner decides what the software must do; the team maintaining the code may be different.
 
-One person may fill several owner roles. One team may implement changes for several owners.
+One person can play several owner roles, and one team can serve several owners.
 
 ---
 
@@ -190,25 +209,7 @@ In this scenario, `save` and `findById` form **one family of functions** if the 
 
 **To place a new method, ask whose requirements will make it change.**
 
----
 
-<!-- _class: diagram highlight -->
-
-# SRP: focus on the class
-
-![width:970px](diagrams/student-class-focus.svg)
-
-One Student class must change for three independent groups.
-
----
-
-<!-- _class: diagram highlight -->
-
-# SOP: focus on the owners
-
-![width:970px](diagrams/student-owner-focus.svg)
-
-Which independent group can ask this class to change?
 
 ---
 
@@ -244,7 +245,6 @@ Robert C. Martin's 2014 explanation traces a reason to change to the people who 
 
 **SOP names that requirements role an owner. It does not introduce a different rule for splitting classes.**
 
-<p class="attribution">Robert C. Martin, 2014</p>
 
 ---
 
