@@ -10,3 +10,21 @@ Roter Faden machen.
 Ein Owner ist die Rolle, die einen zusammenhängenden Satz von Anforderungen festlegt.
 Der Owner entscheidet, was die Software leisten muss; das Team, das den Code pflegt, kann ein anderes sein.
 Eine Person kann mehrere Owner-Rollen übernehmen, und ein Team kann für mehrere Owner arbeiten.
+
+# SRP und SOP – Vergleich
+
+| | SRP | SOP |
+|---|---|---|
+| Blickrichtung | Welche unabhängigen Gründe ändern die Klasse? | Welche unabhängigen Anforderungsrollen verlangen Änderungen? |
+| Stärke | Beschreibt die gewünschte Trennung. | Macht die Suche nach der Änderungsquelle konkret. |
+| Ergebnis im Student-Beispiel | Drei Änderungsgründe. | Drei Owner. Dieselbe Trennung. |
+
+# SOP als Prüffrage – deutsche Fassung
+
+Frage bei jedem Verhalten von `Student`:
+
+1. Wer definiert die Anforderungen dafür?
+2. Kann dieser Owner unabhängig von den anderen Änderungen verlangen?
+3. Könnte eine solche Änderung Verhalten beeinflussen, das Anforderungen eines anderen Owners erfüllt?
+
+Mit SOP lässt sich die Grenze zwischen unabhängigen Änderungsbereichen besprechen, bevor entschieden wird, wo der Code aufgeteilt werden soll.
