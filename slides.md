@@ -4,9 +4,9 @@ theme: default
 size: 16:9
 paginate: true
 html: true
-title: Single Responsibility Principle – Misunderstood and underestimated
+title: Single Ownership Principle – understanding SRP through Student
 author: Nodirbek Usmanov
-description: Single Ownership Principle – converted from the original 24-slide PowerPoint
+description: A step-by-step Student example explains SRP, requirements ownership, and SOP as a proposed rewording.
 footer: Nodirbek Usmanov | Befico GmbH
 style: |
   section { background: #fff; color: #171717; font-family: Arial, Helvetica, sans-serif; font-size: 30px; padding: 65px 70px 70px; justify-content: flex-start; }
@@ -48,16 +48,19 @@ style: |
   .compare blockquote { border: 0; padding: 0; margin: 15px 0 25px; font-size: 34px; line-height: 1.32; }
   .compare p { font-size: 22px; }
     section.actor-owner h1 { font-size: 39px; margin-bottom: 18px; }
-    .actor-owner .comparison-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
-    .actor-owner .comparison-column { min-width: 0; padding: 17px 20px; background: #f3f3ef; border-top: 4px solid #777; }
-    .actor-owner .comparison-column.owner { background: #f5edcf; border-color: #a47b00; }
-    .actor-owner .comparison-column h2 { font-size: 27px; min-height: 0; margin: 0 0 9px; color: #6f5700; }
-    .actor-owner .comparison-column p { font-size: 20px; line-height: 1.3; margin: 0 0 18px; }
-    .actor-owner .comparison-column .example-label { font-size: 15px; color: #666; margin: 23px 0 5px; }
-    .actor-owner .comparison-column .team { font-size: 24px; font-weight: 700; margin-bottom: 5px; }
+    .comparison-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 25px; }
+    .comparison-column { min-width: 0; padding: 17px 20px; background: #f3f3ef; border-top: 4px solid #777; }
+    .comparison-column.owner { background: #f5edcf; border-color: #a47b00; }
+    .comparison-column h2 { font-size: 27px; min-height: 0; margin: 0 0 9px; color: #6f5700; }
+    .comparison-column p { font-size: 23px; line-height: 1.3; margin: 0 0 18px; }
+    .comparison-column .example-label { font-size: 15px; color: #666; margin: 23px 0 5px; }
+    .comparison-column .team { font-size: 24px; font-weight: 700; margin-bottom: 5px; }
+    .actor-owner .comparison-column p { font-size: 20px; }
     .actor-owner .takeaway-line { border-top: 1px solid #999; padding-top: 10px; margin-top: 15px; font-size: 18px; line-height: 1.3; }
   section.takeaway { justify-content: center; }
   section.takeaway li { font-size: 32px; margin-bottom: 27px; }
+  section li { margin-bottom: 14px; }
+  section.diagram.refactor > p { font-size: 24px; }
   section.links li { font-size: 29px; margin-bottom: 35px; }
   .contacts { display: flex; text-align: center; gap: 25px; margin-top: 75px; }
   .contacts > div { flex: 1; }
@@ -69,47 +72,12 @@ style: |
 <!-- _class: cover -->
 
 ![bg left:45% cover](assets/image1.jpeg)
-# Single Responsibility Principle
-## Misunderstood and underestimated
+# Single Ownership Principle
+## Understanding SRP through one Student example
 Nodirbek Usmanov
 
 [linkedin.com/in/nodirbek-usmanov](https://linkedin.com/in/nodirbek-usmanov)  
 [nodirbek@befico.de](mailto:nodirbek@befico.de)
-
-<!--
-Source: original slide 1. Original title spelling: MiSSUnDERSTOOD. Embedded icons are preserved in assets/image3.svg and assets/image4.svg.
--->
-
----
-
-<!-- _class: diagram -->
-
-# Intro
-
-![width:820px](assets/image5.png)
-
-<!--
-Original Slido poll screenshot is preserved unchanged, including its historic QR code and poll number.
--->
-
----
-
-<!-- _class: quote -->
-
-# Single Responsibility Principle
-
-> “A class should have only one reason to change.”
-
-<div class="attribution">Robert C. Martin<br>Agile Software Development: Principles, Patterns, and Practices, 2002</div>
-
----
-
-<!-- _class: photo -->
-
-![bg](assets/image6.jpeg)
-# Single Responsibility Principle
-
-## Is one of the simplest of the principles, and one of the hardest to get
 
 ---
 
@@ -117,335 +85,102 @@ Original Slido poll screenshot is preserved unchanged, including its historic QR
 
 # Single Responsibility Principle (SRP)
 
-> “In context of SRP, we define a responsibility to be a reason for change.”
+> “A class should have only one reason to change.”
 
-<div class="attribution">Robert C. Martin<br>Agile Software Development: Principles, Patterns, and Practices, 2002</div>
+<p class="attribution">Robert C. Martin, 2002</p>
+
+---
+
+<!-- _class: diagram -->
+
+# How many responsibilities?
+
+![width:770px](diagrams/student.svg)
+
+Think of a reason to change, not a method count.
+
+---
+
+<!-- _class: diagram -->
+
+# Add `findById`. What changes?
+
+![width:770px](diagrams/student-database.svg)
+
+Four methods. How many independent reasons to change?
+
+---
+
+<!-- _class: diagram tight -->
+
+# Who asks for these changes?
+
+![width:960px](diagrams/student-owners.svg)
+
+---
+
+# Three change sources, four methods
+
+- **Professor / Administration:** `getFaculty`
+- **DBA:** `save` and `findById`
+- **Operations / BI:** `describeStudent`
+
+`save` and `findById` count together **if the same group drives changes to both**.
+
+---
+
+<!-- _class: diagram highlight -->
+
+# SRP: one class, three change sources
+
+![width:970px](diagrams/student-class-focus.svg)
+
+Each group can request a change independently. That is the SRP problem in this example.
+
+---
+
+# What is an owner here?
+
+An **owner** is the group whose requirements determine a responsibility's behavior and who can request changes to it.
+
+In this example, the proposed owners are Professor / Administration, DBA, and Operations / BI.
+
+**Ownership is about the source of requirements.** It does not mean who commits the code.
+
+---
+
+<!-- _class: diagram highlight -->
+
+# Shift the question to the owners
+
+![width:970px](diagrams/student-actor-focus.svg)
+
+Which independent group does this class have to satisfy when requirements change?
 
 ---
 
 <!-- _class: quote -->
 
-# Single Responsibility Principle (SRP) is about people
+# Single Ownership Principle (SOP)
 
-> “...a single tightly coupled group of people representing a single narrowly defined business function...”
+> “A class should serve one requirements owner.”
 
-<div class="attribution">Robert C. Martin<br>“The Single Responsibility Principle,” 8 May 2014</div>
-
----
-
-<!-- _class: actor-owner -->
-
-# Actor and owner are not automatically the same
-
-<div class="comparison-columns">
-<div class="comparison-column">
-<h2>SRP · Actor</h2>
-<p>Whose needs trigger a change?</p>
-<p class="example-label">IN THE INVOICE MODULE</p>
-<p><strong>Tax team</strong> requests changes to tax calculations.</p>
-<p><strong>Brand team</strong> requests changes to the PDF layout.</p>
-</div>
-<div class="comparison-column owner">
-<h2>SOP · Owner</h2>
-<p>Who is accountable for deciding, prioritizing, and accepting changes?</p>
-<p class="example-label">OWNER OF THE INVOICE MODULE</p>
-<p class="team">Billing Platform team</p>
-<p>Prioritizes both requests and is accountable for the module.</p>
-</div>
-</div>
-<p class="takeaway-line"><strong>SRP asks where changes come from. SOP asks who is accountable.</strong> One owner may coordinate several actors; ownership alone does not decide whether code belongs in one class.</p>
+<p class="attribution">A proposed way to express the SRP change-source test</p>
 
 ---
 
-<!-- _class: diagram -->
-
-# Single Responsibility Principle
-<div class="subtitle">“A class should have only one reason to change.” — Robert C. Martin</div>
-
-![width:850px](diagrams/employee.svg)
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
--->
-
----
-
-<!-- _class: diagram -->
-
-# Responsibility
-
-How many responsibilities does this class have?
-
-![width:850px](diagrams/employee.svg)
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
--->
-
----
-
-<!-- _class: diagram -->
-
-# Responsibility
-
-How many responsibilities does this class have?  **3**
-
-![width:850px](diagrams/employee.svg)
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
--->
-
----
-
-# Conclusion – violates SRP
-
-<div class="split">
-<div><img src="diagrams/employee-compact.svg" alt="Original employee responsibility diagram"></div>
-<div>
-<p>The class knows about</p>
-<ul><li>business rules</li><li>databases</li><li>reports and formatting</li></ul>
-<p><strong>Responsibilities &gt; 1</strong></p>
-<p>Each of these responsibilities will cause the employee class to use other classes in the system.</p>
-</div>
-</div>
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
--->
-
----
-
-<!-- _class: diagram -->
-
-# Responsibility
-
-How many responsibilities does this class have?
-
-![width:800px](diagrams/student.svg)
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
--->
-
----
-
-<!-- _class: diagram -->
-
-# Responsibility
-
-How many responsibilities does this class have?  **3**
-
-![width:800px](diagrams/student.svg)
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
--->
-
----
-
-<!-- _class: diagram tight -->
-
-# Responsibility
-
-Let us add a new function to the class.  
-How many responsibilities does this class have?
-
-![width:760px](diagrams/student.svg)
-
-**+ findById** — Finds a student by id
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
-Original slide included an arrow pointing to the diagram.
--->
-
----
-
-<!-- _class: diagram tight -->
-
-# Responsibility
-
-How many responsibilities does this class have? **3**
-
-![width:800px](diagrams/student-database.svg)
-
-Same family as save, both database functions
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
--->
-
----
-
-# Conclusion – violates SRP
-
-<div class="split">
-<div><img src="diagrams/student-database-compact.svg" alt="Original student responsibility diagram"></div>
-<div>
-<p>The class knows about</p>
-<ul><li>business rules</li><li>databases</li><li>reports and formatting</li></ul>
-<p><strong>Responsibilities &gt; 1</strong></p>
-<p>Each of these responsibilities will cause the student class to use other classes in the system.</p>
-</div>
-</div>
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
--->
-
----
-
-<!-- _class: takeaway -->
-
-# Responsibility – source of change
-
-## The SRP is about users
-
-Who are the users, who add changes to that method?
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
--->
-
----
-
-<!-- _class: diagram -->
-
-# Responsibility
-
-Who are the people, who are the sources of change for the STUDENT class?
-
-![width:1140px](diagrams/student-owners.svg)
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
--->
-
----
-
-<!-- _class: diagram highlight -->
-
-# Single Responsibility Principle
-<div class="subtitle">“A class should have only one reason to change.” — Robert C. Martin</div>
-
-![width:1050px](diagrams/student-class-focus.svg)
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
-Editable draw.io diagram: diagrams/student-class-focus.drawio.
--->
-
----
-
-<!-- _class: diagram highlight -->
-
-# Single Responsibility Principle
-<div class="subtitle">Responsibility is a family of functions that serves one particular actor</div>
-
-![width:1050px](diagrams/student-actor-focus.svg)
-
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
-
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
-Editable draw.io diagram: diagrams/student-actor-focus.drawio.
--->
-
----
-
-# Rephrase
+# SRP and SOP: the same design test
 
 <div class="compare">
 <div>
-<h2>Single Responsibility Principle</h2>
-<blockquote>“A class should have only one reason to change.”</blockquote>
-<p>Robert C. Martin, 2002</p>
+<h2>SRP asks</h2>
+<blockquote>How many independent reasons can change this class?</blockquote>
+<p>Student has three in this example.</p>
 </div>
 <div>
-<h2>Single Ownership Principle</h2>
-<blockquote>“A class should serve only one owner, who defines the requirements to create or change it.”</blockquote>
-<p>Nodirbek Usmanov, 2023</p>
-</div>
-</div>
-
----
-
-# Rephrase 2
-
-<div class="compare">
-<div>
-<h2>Single Responsibility Principle</h2>
-<blockquote>“A class should have only one reason to change.”</blockquote>
-<p>Robert C. Martin, 2002</p>
-</div>
-<div>
-<h2>Single Ownership Principle</h2>
-<blockquote>“A class should serve only one owner, who defines a family of functions (responsibility).”</blockquote>
-<p>Nodirbek Usmanov, 2023</p>
+<h2>SOP asks</h2>
+<blockquote>How many groups can independently demand those changes?</blockquote>
+<p>Student serves three proposed owners.</p>
 </div>
 </div>
 
@@ -453,19 +188,21 @@ Editable draw.io diagram: diagrams/student-actor-focus.drawio.
 
 <!-- _class: diagram refactor -->
 
-# Refactor
-<div class="subtitle">Aware of transitive dependencies</div>
+# Separate the responsibilities
 
-![width:1140px](diagrams/student-refactored.svg)
+![width:1050px](diagrams/student-refactored.svg)
 
-<!--
-Original PowerPoint: off-slide code (not visible in the source slide).
+One class per independently changing responsibility in this example.
 
-class OrderService {
-    fun sendEmail (): = { … }
-    fun findById (): Order = { … }
-    fun generateInvoice (): Invoice = { … }}
--->
+---
+
+# A necessary check before splitting
+
+- `save` and `findById` do **not** belong together merely because both access a database.
+- Ask whether one group really drives changes to both methods.
+- Check whether DBA and Operations / BI specify behavior, or only help implement it.
+
+The actor map is a **hypothesis to verify**, not proof from the method names.
 
 ---
 
@@ -473,24 +210,21 @@ class OrderService {
 
 # Take away
 
-- A responsibility is a family of functions that serves one particular actor
-- Increase the cohesion between things that change for same reasons
-- Decrease the coupling between those things that change for different reasons
-
-<!--
-Source contains a repeated word: “change change”. The repetition was removed.
--->
+- Four methods do not imply four responsibilities.
+- In the stated scenario, three independent change sources imply three responsibilities.
+- “Owner” means the group that drives a responsibility's requirements.
+- SOP makes this reading of SRP explicit; it is a proposed rewording.
 
 ---
 
 <!-- _class: links -->
 
-# Links
+# Sources
 
 - [The Single Responsibility Principle](https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html)  
-  Robert C. Martin (Uncle Bob), 8 May 2014
+  Robert C. Martin, 8 May 2014
 - *Agile Software Development: Principles, Patterns, and Practices*  
-  Robert C. Martin (Uncle Bob), 2002
+  Robert C. Martin, 2002
 
 <img class="befico" src="assets/image2.png" alt="Befico">
 

@@ -1,0 +1,7 @@
+
+SRP fragt, wer Änderungen auslöst; 
+SOP fragt, wer für Entscheidungen verantwortlich ist 
+(Actor vs. Owner). 
+
+Roter Faden machen.
+

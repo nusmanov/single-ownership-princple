@@ -1,6 +1,6 @@
 # Marp-Präsentation mit draw.io-Diagrammen
 
-24 Folien. Alle sieben unterschiedlichen Klassendiagramme und ihre Hervorhebungen sind als native, bearbeitbare draw.io-Objekte umgesetzt. Für die zwei Schlussfolgerungsfolien gibt es kompakte Varianten.
+16 Folien über das Single Responsibility Principle (SRP) und das Single Ownership Principle (SOP), durchgehend am Student-Beispiel. Die Präsentation führt die vier Methoden schrittweise ein, fragt nach den Änderungsquellen und erklärt SOP als vorgeschlagene Umformulierung von SRP. Die verwendeten Diagramme sind als draw.io-Dateien bearbeitbar.
 
 ## Präsentieren
 
@@ -17,10 +17,11 @@ Nach Änderungen an einem Diagramm als SVG exportieren und **Kopie meines Diagra
 
 ```sh
 npx @marp-team/marp-cli slides.md --html -o slides.html
+ruby --disable-gems embed-assets.rb slides.html
 ```
 
-Marp-Quelle, Ordner `assets` und `diagrams` zusammen lassen. Die bereitgestellte HTML-Version funktioniert als einzelne Datei.
+Marp-Quelle, Ordner `assets` und `diagrams` zum Bearbeiten zusammen lassen. Der zweite Befehl bettet alle verwendeten Bilder in `slides.html` ein; diese Version funktioniert danach als einzelne Datei.
 
 ## Inhalt
 
-Methodennamen, Rollen und Abhängigkeiten entsprechen den ursprünglichen Diagrammen. Blau, Rot und Grün markieren dieselben Verantwortlichkeiten. Die Hervorhebungen auf Folien 17–18 sind native Objekte (Lupe, Blitze, Herzen, Haken) und vollständig bearbeitbar. Fotos, Logos, Kontakticons und Slido-Grafik bleiben erhalten. Die Slido-Grafik enthält den historischen QR-Code. PowerPoint-Animationen werden nicht übernommen.
+Die Präsentation verwendet nur das Student-Beispiel: vier Methoden, im angenommenen Szenario drei unabhängige Änderungsquellen und die daraus folgende Aufteilung. „Owner“ bezeichnet hier die Gruppe, deren Anforderungen eine Verantwortung bestimmen. Eine kritische Folie macht deutlich, dass die Zuordnung zu DBA und Operations / BI im konkreten System geprüft werden muss. Der alte Slido-QR-Code wird nicht verwendet. PowerPoint-Animationen werden nicht übernommen.
