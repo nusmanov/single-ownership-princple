@@ -152,11 +152,11 @@ Four methods. How many independent reasons to change?
 
 # One responsibility can contain several functions
 
-In this scenario, `save` and `findById` form **one family of functions**: both follow the same storage policy.
+In this scenario, `save` and `findById` form **one family of functions** if one actor sets the storage policy for both.
 
 `getFaculty` and `describeStudent` answer to different actors. They can change for different reasons.
 
-**The unit of SRP is a reason to change. The owner helps identify it.**
+**To place a new method, ask whose requirements will make it change.**
 
 ---
 
@@ -172,11 +172,11 @@ One Student class must change for three independent groups.
 
 # What is an owner here?
 
-**Owner (in SOP):** one person or tightly coupled group representing one narrowly defined business function.
+**Owner (in SOP):** the actor whose requirements define one narrowly scoped business function.
+
+An actor is a **role**, not a headcount. One person may play several roles; one team may support several actors.
 
 In this example, the proposed owners are Professor / Administration, DBA, and Operations / BI.
-
-A platform team may maintain several functions. Count the independent sources of requirements.
 
 ---
 
@@ -215,7 +215,7 @@ Which independent group can ask this class to change?
 </div>
 </div>
 
-<p class="subtitle" style="margin-top:32px">Martin (2014) already connects SRP to people; SOP puts the owner into the one-sentence rule.</p>
+<p class="subtitle" style="margin-top:32px">Martin calls the change-driving role an actor; SOP calls it an owner. Both identify the same boundary.</p>
 
 ---
 
@@ -262,6 +262,10 @@ The actor map is a **hypothesis to verify**, not proof from the method names.
 <p class="verdict">Violated: three owners.</p>
 </div>
 </div>
+
+<!--
+Presenter prompt: Suppose Employee gains SummarizeHoursWorked. Ask the audience who would request changes to it. Its actor, not its name, determines which family of functions it belongs to.
+-->
 
 ---
 
@@ -334,6 +338,8 @@ The actor map is a **hypothesis to verify**, not proof from the method names.
   Robert C. Martin, 8 May 2014
 - *Agile Software Development: Principles, Patterns, and Practices*  
   Robert C. Martin, 2002
+- *Clean Architecture: A Craftsman's Guide to Software Structure and Design*  
+  Robert C. Martin, 2017
 
 <img class="befico" src="assets/image2.png" alt="Befico">
 
