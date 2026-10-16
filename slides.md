@@ -59,7 +59,7 @@ style: |
     .comparison-column .example-label { font-size: 15px; color: #666; margin: 23px 0 5px; }
     .comparison-column .team { font-size: 24px; font-weight: 700; margin-bottom: 5px; }
   section.takeaway { justify-content: center; }
-  section.takeaway li { font-size: 32px; margin-bottom: 27px; }
+  section.takeaway li { font-size: 30px; line-height: 1.3; margin-bottom: 25px; }
   section li { margin-bottom: 14px; }
   section.diagram.refactor > p { font-size: 24px; }
   section.example h1 { margin-bottom: 22px; }
@@ -351,11 +351,10 @@ Presenter prompt: Suppose Employee gains SummarizeHoursWorked. Ask the audience 
 
 # Take away
 
-- The number of methods does not determine the number of responsibilities.
-- **SRP:** Does the class have one reason to change?
-- **SOP:** Which requirements owner can independently ask it to change?
-- Count coherent policies and their owners, not methods or broad platform teams.
-- SOP makes SRP's change source explicit. Martin's 2014 explanation already points to people.
+- **Count change sources, not methods.** `save` and `findById` can serve the same storage policy.
+- **SRP asks why; SOP asks who.** Count independent reasons for change and the requirements owners behind them.
+- **The split is the same.** In our Student scenario, three independent requirement sources call for three modules.
+- **Owner means a requirements role, not a code maintainer.** Martin's 2014 SRP already points to people.
 
 ---
 
