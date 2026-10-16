@@ -82,12 +82,20 @@ style: |
 <!-- _class: cover -->
 
 ![bg left:45% cover](assets/image1.jpeg)
-# Single Ownership Principle
+# Single Responsibility Principle
 ## From reasons for change to requirements owners
 Nodirbek Usmanov
 
 [linkedin.com/in/nodirbek-usmanov](https://linkedin.com/in/nodirbek-usmanov)  
 [nodirbek@befico.de](mailto:nodirbek@befico.de)
+
+---
+<!-- _class: diagram -->
+
+# Please scan and vote
+
+![width:770px](assets/slido.png)
+
 
 ---
 
