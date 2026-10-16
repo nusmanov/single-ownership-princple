@@ -47,7 +47,6 @@ style: |
   .compare h2 { font-size: 28px; color: #6f5700; min-height: 70px; }
   .compare blockquote { border: 0; padding: 0; margin: 15px 0 25px; font-size: 34px; line-height: 1.32; }
   .compare p { font-size: 22px; }
-    section.actor-owner h1 { font-size: 39px; margin-bottom: 18px; }
     .comparison-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 25px; }
     .comparison-column { min-width: 0; padding: 17px 20px; background: #f3f3ef; border-top: 4px solid #777; }
     .comparison-column.owner { background: #f5edcf; border-color: #a47b00; }
@@ -55,8 +54,6 @@ style: |
     .comparison-column p { font-size: 23px; line-height: 1.3; margin: 0 0 18px; }
     .comparison-column .example-label { font-size: 15px; color: #666; margin: 23px 0 5px; }
     .comparison-column .team { font-size: 24px; font-weight: 700; margin-bottom: 5px; }
-    .actor-owner .comparison-column p { font-size: 20px; }
-    .actor-owner .takeaway-line { border-top: 1px solid #999; padding-top: 10px; margin-top: 15px; font-size: 18px; line-height: 1.3; }
   section.takeaway { justify-content: center; }
   section.takeaway li { font-size: 32px; margin-bottom: 27px; }
   section li { margin-bottom: 14px; }
@@ -152,9 +149,9 @@ Four methods. How many independent reasons to change?
 
 # One responsibility can contain several functions
 
-In this scenario, `save` and `findById` form **one family of functions** if one actor sets the storage policy for both.
+In this scenario, `save` and `findById` form **one family of functions** if one owner sets the storage policy for both.
 
-`getFaculty` and `describeStudent` answer to different actors. They can change for different reasons.
+`getFaculty` and `describeStudent` answer to different owners. They can change for different reasons.
 
 **To place a new method, ask whose requirements will make it change.**
 
@@ -172,9 +169,9 @@ One Student class must change for three independent groups.
 
 # What is an owner here?
 
-**Owner (in SOP):** the actor whose requirements define one narrowly scoped business function.
+**Owner (in SOP):** the role whose requirements define one narrowly scoped business function.
 
-An actor is a **role**, not a headcount. One person may play several roles; one team may support several actors.
+An owner is a **role**, not a headcount. One person may fill several owner roles; one team may serve several owners.
 
 In this example, the proposed owners are Professor / Administration, DBA, and Operations / BI.
 
@@ -184,7 +181,7 @@ In this example, the proposed owners are Professor / Administration, DBA, and Op
 
 # SOP: focus on the owners
 
-![width:970px](diagrams/student-actor-focus.svg)
+![width:970px](diagrams/student-owner-focus.svg)
 
 Which independent group can ask this class to change?
 
@@ -215,7 +212,7 @@ Which independent group can ask this class to change?
 </div>
 </div>
 
-<p class="subtitle" style="margin-top:32px">Martin calls the change-driving role an actor; SOP calls it an owner. Both identify the same boundary.</p>
+<p class="subtitle" style="margin-top:32px">Both locate the boundary at independent sources of requirements and change.</p>
 
 ---
 
@@ -236,7 +233,7 @@ Keep together what changes for the same reason; separate what changes for differ
 - Check whether DBA and Operations / BI specify behavior, or only help implement it.
 - Check dependencies after the split: a change to shared `Student` may still affect the other classes.
 
-The actor map is a **hypothesis to verify**, not proof from the method names.
+The owner map is a **hypothesis to verify**, not proof from the method names.
 
 ---
 
@@ -264,7 +261,7 @@ The actor map is a **hypothesis to verify**, not proof from the method names.
 </div>
 
 <!--
-Presenter prompt: Suppose Employee gains SummarizeHoursWorked. Ask the audience who would request changes to it. Its actor, not its name, determines which family of functions it belongs to.
+Presenter prompt: Suppose Employee gains SummarizeHoursWorked. Ask the audience who would request changes to it. Its owner, not its name, determines which family of functions it belongs to.
 -->
 
 ---
@@ -334,10 +331,12 @@ Presenter prompt: Suppose Employee gains SummarizeHoursWorked. Ask the audience 
 
 # Sources
 
-- [The Single Responsibility Principle](https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html)  
-  Robert C. Martin, 8 May 2014
 - *Agile Software Development: Principles, Patterns, and Practices*  
   Robert C. Martin, 2002
+  
+- [The Single Responsibility Principle](https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html)  
+  Robert C. Martin, 8 May 2014
+
 - *Clean Architecture: A Craftsman's Guide to Software Structure and Design*  
   Robert C. Martin, 2017
 
