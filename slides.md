@@ -225,15 +225,15 @@ In this scenario, `save` and `findById` form **one family of functions** if the 
 
 ---
 
-# SOP as a design review question
+# SOP: Three design review questions
 
 For each behavior in `Student`, ask:
 
-1. Who defines its requirements?
-2. Can that owner request changes independently?
-3. Could such a change affect behavior serving another owner?
+1. Who defines what this behavior must do?
+2. Can that owner request a change independently of the others?
+3. Could that change affect behavior another owner relies on?
 
-SOP makes the change boundary easier to discuss before deciding where to split the code.
+Use the answers to group code by change source and decide where a split may help.
 
 ---
 

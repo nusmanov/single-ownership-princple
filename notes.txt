@@ -19,12 +19,12 @@ Eine Person kann mehrere Owner-Rollen übernehmen, und ein Team kann für mehrer
 | Stärke | Beschreibt die gewünschte Trennung. | Macht die Suche nach der Änderungsquelle konkret. |
 | Ergebnis im Student-Beispiel | Drei Änderungsgründe. | Drei Owner. Dieselbe Trennung. |
 
-# SOP als Prüffrage – deutsche Fassung
+# SOP: Drei Fragen für den Design-Review
 
-Frage bei jedem Verhalten von `Student`:
+Prüfe jede Funktion in `Student`:
 
-1. Wer definiert die Anforderungen dafür?
-2. Kann dieser Owner unabhängig von den anderen Änderungen verlangen?
-3. Könnte eine solche Änderung Verhalten beeinflussen, das Anforderungen eines anderen Owners erfüllt?
+1. Wer bestimmt, was die Funktion leisten muss?
+2. Kann dieser Owner eine Änderung verlangen, ohne dass andere Owner ihre Anforderungen ändern?
+3. Kann diese Änderung ein Verhalten beeinflussen, das ein anderer Owner benötigt?
 
-Mit SOP lässt sich die Grenze zwischen unabhängigen Änderungsbereichen besprechen, bevor entschieden wird, wo der Code aufgeteilt werden soll.
+Die Antworten helfen zu entscheiden, welche Funktionen zusammengehören und wo der Code getrennt werden sollte.
