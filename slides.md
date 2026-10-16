@@ -6,7 +6,7 @@ paginate: true
 html: true
 title: Single Ownership Principle – understanding SRP through Student
 author: Nodirbek Usmanov
-description: A step-by-step Student example explains SRP, requirements ownership, and SOP as a proposed rewording.
+description: A Student example and three further classes explain SRP and SOP as two ways to identify the same change boundary.
 footer: Nodirbek Usmanov | Befico GmbH
 style: |
   section { background: #fff; color: #171717; font-family: Arial, Helvetica, sans-serif; font-size: 30px; padding: 65px 70px 70px; justify-content: flex-start; }
@@ -61,6 +61,15 @@ style: |
   section.takeaway li { font-size: 32px; margin-bottom: 27px; }
   section li { margin-bottom: 14px; }
   section.diagram.refactor > p { font-size: 24px; }
+  section.example h1 { margin-bottom: 22px; }
+  section.example .assumption { font-size: 21px; color: #666; margin: 0 0 25px; }
+  section.example .assessment { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 25px; margin-top: 15px; }
+  section.example .assessment > div { min-width: 0; }
+  section.example .assessment > div + div { border-left: 1px solid #bbb; padding-left: 22px; }
+  section.example .assessment h2 { color: #6f5700; font-size: 29px; margin: 0 0 18px; }
+  section.example .assessment p, section.example .assessment li { font-size: 24px; line-height: 1.32; }
+  section.example .assessment ul { padding-left: 27px; margin: 0; }
+  section.example .assessment .verdict { font-weight: 700; margin-top: 20px; }
   section.links li { font-size: 29px; margin-bottom: 35px; }
   .contacts { display: flex; text-align: center; gap: 25px; margin-top: 75px; }
   .contacts > div { flex: 1; }
@@ -73,7 +82,7 @@ style: |
 
 ![bg left:45% cover](assets/image1.jpeg)
 # Single Ownership Principle
-## Understanding SRP through one Student example
+## Understanding SRP through Student and three more examples
 Nodirbek Usmanov
 
 [linkedin.com/in/nodirbek-usmanov](https://linkedin.com/in/nodirbek-usmanov)  
@@ -88,6 +97,20 @@ Nodirbek Usmanov
 > “A class should have only one reason to change.”
 
 <p class="attribution">Robert C. Martin, 2002</p>
+
+---
+
+<!-- _class: quote -->
+
+# Single Responsibility Principle (SRP)
+
+> “A class should have only one reason to change.”
+
+<p class="attribution">Robert C. Martin, 2002</p>
+
+> “Each software module should have one and only one reason to change.”
+
+<p class="attribution">Robert C. Martin, 2014</p>
 
 ---
 
@@ -125,17 +148,17 @@ Four methods. How many independent reasons to change?
 - **DBA:** `save` and `findById`
 - **Operations / BI:** `describeStudent`
 
-`save` and `findById` count together **if the same group drives changes to both**.
+`save` and `findById` count together **if the same storage policy drives changes to both**.
 
 ---
 
 # One responsibility can contain several functions
 
-In this scenario, `save` and `findById` form **one family of functions**: the same actor requests changes to both.
+In this scenario, `save` and `findById` form **one family of functions**: both follow the same storage policy.
 
 `getFaculty` and `describeStudent` answer to different actors. They can change for different reasons.
 
-**The unit of SRP is the change source, not the individual method.**
+**The unit of SRP is a reason to change. The owner helps identify it.**
 
 ---
 
@@ -151,11 +174,11 @@ Each group can request a change independently. That is the SRP problem in this e
 
 # What is an owner here?
 
-An **owner** is the group whose requirements determine a responsibility's behavior and who can request changes to it.
+An **owner** is the person or closely related group that can request changes for **one narrowly defined business function**.
 
 In this example, the proposed owners are Professor / Administration, DBA, and Operations / BI.
 
-**Ownership is about the source of requirements.** It does not mean who commits the code.
+A platform team may maintain several functions. Count the independent sources of requirements, not the team that edits the code.
 
 ---
 
@@ -173,13 +196,13 @@ Which independent group does this class have to satisfy when requirements change
 
 # Single Ownership Principle (SOP)
 
-> “A class should serve one owner who defines the requirements for its responsibility.”
+> “A class should answer to one owner whose requirements drive its changes.”
 
-<p class="attribution">A proposed way to express the SRP change-source test</p>
+<p class="attribution">Nodirbek Usmanov, 2023</p>
 
 ---
 
-# SRP and SOP: the same design test
+# SRP and SOP find the same boundary
 
 <div class="compare">
 <div>
@@ -189,8 +212,8 @@ Which independent group does this class have to satisfy when requirements change
 </div>
 <div>
 <h2>SOP asks</h2>
-<blockquote>How many groups can independently demand those changes?</blockquote>
-<p>Student serves three proposed owners.</p>
+<blockquote>Who can independently request those changes?</blockquote>
+<p>Student serves three proposed owners in this example.</p>
 </div>
 </div>
 
@@ -209,7 +232,7 @@ Keep together what changes for the same reason; separate what changes for differ
 # A necessary check before splitting
 
 - `save` and `findById` do **not** belong together merely because both access a database.
-- Ask whether one group really drives changes to both methods.
+- Ask whether one storage policy really drives changes to both methods.
 - Check whether DBA and Operations / BI specify behavior, or only help implement it.
 - Check dependencies after the split: a change to shared `Student` may still affect the other classes.
 
@@ -217,14 +240,89 @@ The actor map is a **hypothesis to verify**, not proof from the method names.
 
 ---
 
+<!-- _class: example -->
+
+# Example 1 — Employee
+
+<p class="assumption">Assumption: pay, storage and description policies change independently.</p>
+
+<div class="assessment">
+<div>
+<h2>Employee class</h2>
+<ul><li><code>CalculatePay</code></li><li><code>Save</code></li><li><code>DescribeEmployee</code></li></ul>
+</div>
+<div>
+<h2>SRP</h2>
+<p>Pay rules, record retention and employee descriptions can change independently.</p>
+<p class="verdict">Violated: three reasons to change.</p>
+</div>
+<div>
+<h2>SOP</h2>
+<p>Payroll, DBA and Operations / BI can each request changes.</p>
+<p class="verdict">Violated: three owners.</p>
+</div>
+</div>
+
+---
+
+<!-- _class: example -->
+
+# Example 2 — Invoice
+
+<p class="assumption">Assumption: tax, PDF design and archiving policies change independently.</p>
+
+<div class="assessment">
+<div>
+<h2>Invoice class</h2>
+<ul><li><code>CalculateTax</code></li><li><code>GeneratePdf</code></li><li><code>Archive</code></li></ul>
+</div>
+<div>
+<h2>SRP</h2>
+<p>Tax law, PDF branding and retention rules change independently.</p>
+<p class="verdict">Violated: three reasons to change.</p>
+</div>
+<div>
+<h2>SOP</h2>
+<p>Tax, Billing Design and Records can each request changes.</p>
+<p class="verdict">Violated: three owners.</p>
+</div>
+</div>
+
+---
+
+<!-- _class: example -->
+
+# Example 3 — UserAccount
+
+<p class="assumption">Assumption: all three methods follow one authentication policy.</p>
+
+<div class="assessment">
+<div>
+<h2>UserAccount class</h2>
+<ul><li><code>VerifyPassword</code></li><li><code>ChangePassword</code></li><li><code>ResetPassword</code></li></ul>
+</div>
+<div>
+<h2>SRP</h2>
+<p>All three methods change with the same authentication policy.</p>
+<p class="verdict">Satisfied: one reason to change.</p>
+</div>
+<div>
+<h2>SOP</h2>
+<p>Identity Security defines this one policy.</p>
+<p class="verdict">Satisfied: one owner.</p>
+</div>
+</div>
+
+---
+
 <!-- _class: takeaway -->
 
 # Take away
 
-- Four methods do not imply four responsibilities.
-- In this scenario, four methods map to three independent change sources.
-- “Owner” means the group that drives a responsibility's requirements.
-- Group functions by change source. SOP makes this reading of SRP explicit.
+- The number of methods does not determine the number of responsibilities.
+- **SRP:** Does the class have one reason to change?
+- **SOP:** Does it serve one owner of that responsibility?
+- Count narrowly defined requirement sources, not broad platform teams. Then both identify the same boundary.
 
 ---
 
@@ -244,21 +342,27 @@ The actor map is a **hypothesis to verify**, not proof from the method names.
 # Thank you
 
 <div class="contacts">
-<div>
-<img src="assets/image14.svg" alt="Reviewers">
-<p>Reviewer Ulugbek Usmanov</p>
-<p>Adesso AG Deutschland</p>
-</div>
-<div>
-<img src="assets/image14.svg" alt="Reviewers">
-<p>Reviewer Marcus Schroeder</p>
-<p>flint &amp; sparks GmbH, Berlin</p>
-</div>
+
 <div>
 <img src="assets/image15.svg" alt="Email">
 <p>Contact me</p>
 <p><a href="https://linkedin.com/in/nodirbek-usmanov">linkedin.com/in/nodirbek-usmanov</a></p>
 <p><a href="mailto:nodirbek@befico.de">nodirbek@befico.de</a></p>
 </div>
+
+<div>
+<img src="assets/image14.svg" alt="Reviewers">
+<p>Reviewer Ulugbek Usmanov</p>
+<p>Adesso AG Deutschland</p>
+</div>
+
+<div>
+<img src="assets/image14.svg" alt="Reviewers">
+<p>Reviewer Marcus Schroeder</p>
+<p>flint &amp; sparks GmbH, Berlin</p>
+</div>
+
+
+
 </div>
 <img class="befico" src="assets/image2.png" alt="Befico">

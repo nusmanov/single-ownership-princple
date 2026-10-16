@@ -1,6 +1,6 @@
 # Marp-Präsentation mit draw.io-Diagrammen
 
-17 Folien über das Single Responsibility Principle (SRP) und das Single Ownership Principle (SOP), durchgehend am Student-Beispiel. Die Präsentation führt die vier Methoden schrittweise ein, fragt nach den Änderungsquellen und erklärt SOP als vorgeschlagene Umformulierung von SRP. Die verwendeten Diagramme sind als draw.io-Dateien bearbeitbar.
+20 Folien über das Single Responsibility Principle (SRP) und das Single Ownership Principle (SOP). Die Präsentation führt die vier Student-Methoden schrittweise ein und zeigt anschließend, wie Änderungsgründe und ihre eng definierten Anforderungs-Owner dieselbe Klassengrenze sichtbar machen. Vor dem Fazit folgen drei Klassenbeispiele mit je einer Aussage zu SRP und SOP. Die verwendeten Diagramme sind als draw.io-Dateien bearbeitbar.
 
 ## Präsentieren
 
@@ -24,4 +24,4 @@ Marp-Quelle, Ordner `assets` und `diagrams` zum Bearbeiten zusammen lassen. Der 
 
 ## Inhalt
 
-Die Präsentation verwendet nur das Student-Beispiel: vier Methoden, im angenommenen Szenario drei unabhängige Änderungsquellen und die daraus folgende Aufteilung. Eine Verantwortung kann mehrere Funktionen umfassen, wenn dieselbe Gruppe Änderungen an ihnen verlangt. „Owner“ bezeichnet hier die Gruppe, deren Anforderungen eine Verantwortung bestimmen. Eine kritische Folie macht deutlich, dass die Zuordnung zu DBA und Operations / BI sowie Abhängigkeiten nach der Aufteilung im konkreten System geprüft werden müssen. Der alte Slido-QR-Code wird nicht verwendet. PowerPoint-Animationen werden nicht übernommen.
+Das ausführliche Student-Beispiel zeigt vier Methoden, im angenommenen Szenario drei unabhängige Änderungsgründe und drei Owner. Employee und Invoice verletzen beide Formulierungen; UserAccount erfüllt beide unter der Annahme einer gemeinsamen Authentifizierungs-Policy. „Owner“ bezeichnet hier die Person oder eng zusammenhängende Gruppe, die Änderungen an einer klar abgegrenzten fachlichen Verantwortung verlangen kann. Ein Plattformteam kann mehrere solcher Owner-Rollen vertreten und darf deshalb nicht einfach als ein Owner gezählt werden. Die Zuordnungen sind Annahmen für die Beispiele und müssen im konkreten System geprüft werden. Der alte Slido-QR-Code wird nicht verwendet. PowerPoint-Animationen werden nicht übernommen.
