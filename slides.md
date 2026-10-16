@@ -102,15 +102,13 @@ Nodirbek Usmanov
 
 <!-- _class: quote -->
 
-# Single Responsibility Principle (SRP)
-
-> “A class should have only one reason to change.”
-
-<p class="attribution">Robert C. Martin, 2002</p>
+# SRP: Martin's clarification in 2014
 
 > “Each software module should have one and only one reason to change.”
 
 <p class="attribution">Robert C. Martin, 2014</p>
+
+<p class="attribution">The reason comes from people representing a narrowly defined business function.</p>
 
 ---
 
@@ -164,31 +162,31 @@ In this scenario, `save` and `findById` form **one family of functions**: both f
 
 <!-- _class: diagram highlight -->
 
-# SRP: one class, three change sources
+# SRP: focus on the class
 
 ![width:970px](diagrams/student-class-focus.svg)
 
-Each group can request a change independently. That is the SRP problem in this example.
+One Student class must change for three independent groups.
 
 ---
 
 # What is an owner here?
 
-An **owner** is the person or closely related group that can request changes for **one narrowly defined business function**.
+**Owner (in SOP):** one person or tightly coupled group representing one narrowly defined business function.
 
 In this example, the proposed owners are Professor / Administration, DBA, and Operations / BI.
 
-A platform team may maintain several functions. Count the independent sources of requirements, not the team that edits the code.
+A platform team may maintain several functions. Count the independent sources of requirements.
 
 ---
 
 <!-- _class: diagram highlight -->
 
-# Shift the question to the owners
+# SOP: focus on the owners
 
 ![width:970px](diagrams/student-actor-focus.svg)
 
-Which independent group does this class have to satisfy when requirements change?
+Which independent group can ask this class to change?
 
 ---
 
@@ -216,6 +214,8 @@ Which independent group does this class have to satisfy when requirements change
 <p>Student serves three proposed owners in this example.</p>
 </div>
 </div>
+
+<p class="subtitle" style="margin-top:32px">Martin (2014) already connects SRP to people; SOP puts the owner into the one-sentence rule.</p>
 
 ---
 

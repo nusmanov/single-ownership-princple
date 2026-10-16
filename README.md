@@ -1,6 +1,6 @@
 # Marp-Präsentation mit draw.io-Diagrammen
 
-20 Folien über das Single Responsibility Principle (SRP) und das Single Ownership Principle (SOP). Die Präsentation führt die vier Student-Methoden schrittweise ein und zeigt anschließend, wie Änderungsgründe und ihre eng definierten Anforderungs-Owner dieselbe Klassengrenze sichtbar machen. Vor dem Fazit folgen drei Klassenbeispiele mit je einer Aussage zu SRP und SOP. Die verwendeten Diagramme sind als draw.io-Dateien bearbeitbar.
+21 Folien über das Single Responsibility Principle (SRP) und das Single Ownership Principle (SOP). Die Präsentation führt die vier Student-Methoden schrittweise ein und zeigt anschließend die Blickrichtungen auf die Klasse (SRP) und auf die Anforderungs-Owner (SOP). Die Owner-Folie definiert den Begriff nach Martins Akteursperspektive von 2014; die SOP-Folie verwendet Nodirbeks Definition von 2023. Vor dem Fazit folgen drei Klassenbeispiele mit je einer Aussage zu SRP und SOP. Die verwendeten Diagramme sind als draw.io-Dateien bearbeitbar.
 
 ## Präsentieren
 
