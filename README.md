@@ -1,6 +1,6 @@
 # Marp-Präsentation mit draw.io-Diagrammen
 
-16 Folien über das Single Responsibility Principle (SRP) und das Single Ownership Principle (SOP), durchgehend am Student-Beispiel. Die Präsentation führt die vier Methoden schrittweise ein, fragt nach den Änderungsquellen und erklärt SOP als vorgeschlagene Umformulierung von SRP. Die verwendeten Diagramme sind als draw.io-Dateien bearbeitbar.
+17 Folien über das Single Responsibility Principle (SRP) und das Single Ownership Principle (SOP), durchgehend am Student-Beispiel. Die Präsentation führt die vier Methoden schrittweise ein, fragt nach den Änderungsquellen und erklärt SOP als vorgeschlagene Umformulierung von SRP. Die verwendeten Diagramme sind als draw.io-Dateien bearbeitbar.
 
 ## Präsentieren
 
@@ -24,4 +24,4 @@ Marp-Quelle, Ordner `assets` und `diagrams` zum Bearbeiten zusammen lassen. Der 
 
 ## Inhalt
 
-Die Präsentation verwendet nur das Student-Beispiel: vier Methoden, im angenommenen Szenario drei unabhängige Änderungsquellen und die daraus folgende Aufteilung. „Owner“ bezeichnet hier die Gruppe, deren Anforderungen eine Verantwortung bestimmen. Eine kritische Folie macht deutlich, dass die Zuordnung zu DBA und Operations / BI im konkreten System geprüft werden muss. Der alte Slido-QR-Code wird nicht verwendet. PowerPoint-Animationen werden nicht übernommen.
+Die Präsentation verwendet nur das Student-Beispiel: vier Methoden, im angenommenen Szenario drei unabhängige Änderungsquellen und die daraus folgende Aufteilung. Eine Verantwortung kann mehrere Funktionen umfassen, wenn dieselbe Gruppe Änderungen an ihnen verlangt. „Owner“ bezeichnet hier die Gruppe, deren Anforderungen eine Verantwortung bestimmen. Eine kritische Folie macht deutlich, dass die Zuordnung zu DBA und Operations / BI sowie Abhängigkeiten nach der Aufteilung im konkreten System geprüft werden müssen. Der alte Slido-QR-Code wird nicht verwendet. PowerPoint-Animationen werden nicht übernommen.

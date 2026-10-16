@@ -129,6 +129,16 @@ Four methods. How many independent reasons to change?
 
 ---
 
+# One responsibility can contain several functions
+
+In this scenario, `save` and `findById` form **one family of functions**: the same actor requests changes to both.
+
+`getFaculty` and `describeStudent` answer to different actors. They can change for different reasons.
+
+**The unit of SRP is the change source, not the individual method.**
+
+---
+
 <!-- _class: diagram highlight -->
 
 # SRP: one class, three change sources
@@ -163,7 +173,7 @@ Which independent group does this class have to satisfy when requirements change
 
 # Single Ownership Principle (SOP)
 
-> “A class should serve one requirements owner.”
+> “A class should serve one owner who defines the requirements for its responsibility.”
 
 <p class="attribution">A proposed way to express the SRP change-source test</p>
 
@@ -192,7 +202,7 @@ Which independent group does this class have to satisfy when requirements change
 
 ![width:1050px](diagrams/student-refactored.svg)
 
-One class per independently changing responsibility in this example.
+Keep together what changes for the same reason; separate what changes for different reasons.
 
 ---
 
@@ -201,6 +211,7 @@ One class per independently changing responsibility in this example.
 - `save` and `findById` do **not** belong together merely because both access a database.
 - Ask whether one group really drives changes to both methods.
 - Check whether DBA and Operations / BI specify behavior, or only help implement it.
+- Check dependencies after the split: a change to shared `Student` may still affect the other classes.
 
 The actor map is a **hypothesis to verify**, not proof from the method names.
 
@@ -211,9 +222,9 @@ The actor map is a **hypothesis to verify**, not proof from the method names.
 # Take away
 
 - Four methods do not imply four responsibilities.
-- In the stated scenario, three independent change sources imply three responsibilities.
+- In this scenario, four methods map to three independent change sources.
 - “Owner” means the group that drives a responsibility's requirements.
-- SOP makes this reading of SRP explicit; it is a proposed rewording.
+- Group functions by change source. SOP makes this reading of SRP explicit.
 
 ---
 
